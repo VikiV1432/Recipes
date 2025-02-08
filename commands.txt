@@ -1,0 +1,6 @@
+python -m venv venv - создает виртуальную рабочу среду
+venv\Scripts\activate - активирует виртуальную рабочую среду
+pip install django -  установить библиотеку Django
+pip install pillow - скачивает библиотеку для работы с картинками
+pip install python-dotenv - скачиваем библиотеку для секретных переменых
+pip install environ - скачиваем библиотеку для секретных переменых
