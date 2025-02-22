@@ -4,3 +4,12 @@ pip install django -  установить библиотеку Django
 pip install pillow - скачивает библиотеку для работы с картинками
 pip install python-dotenv - скачиваем библиотеку для секретных переменых
 pip install environ - скачиваем библиотеку для секретных переменых
+django-admin startproject config . - создаем проект django
+python manage.py startapp main - создаем приложение django
+pip freeze > requirements.txt - записывает все библиотеки в спецальный файл
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/VikiV1432/Recipes.git
+git push -u origin main
