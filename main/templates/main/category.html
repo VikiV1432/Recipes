@@ -1,0 +1,13 @@
+{% load static %}
+<div class='category'>
+    <a href="{{link}}">
+        {% if  image %}
+            <img src="{{image.url}}" alt="{{title}}">
+        {% else %}
+            <img class='category__noimage' src="{% static "main/images/no-pictures.png" %}" alt="{{title}}">
+        {% endif %}
+        <h3>
+            {{title}}
+        </h3>
+    </a>
+</div>

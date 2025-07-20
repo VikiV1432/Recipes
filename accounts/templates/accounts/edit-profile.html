@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Edit Profile
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "accounts/css/style.css" %}">
+{% endblock css %}
+
+{% block content %}
+        <section class='section'>
+            <div class="container">
+                <form method="POST" class="account-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>
+                        Edit Profile
+                    </h2>
+                     {% for input in form %}
+                        <p>
+                            {% if input.name == "avatar" %}
+                                {% if  request.user.profile and request.user.profile.avatar%}
+                                    <img src="{{request.user.profile.avatar.url}}" alt="{{user.username}}'s avatar" class="profile-info-avatar">
+                                {% else %}
+                                    <img src="{% static "main/images/no-avatar.svg" %}" alt="no avatar" class="profile-info-avatar">
+                                {% endif %}
+                                <input type="file" name="avatar" id="avatar">
+                            {% else %}
+                                {{input}}
+                            {% endif %}
+                        </p>
+                    {% endfor %}
+                    <button class='btn'>
+                        Save
+                    </button>
+                    {% for message in messages %}
+                        <p>
+                            {{message}}
+                        </p>
+                    {% endfor %}
+                </form>
+            </div>
+        </section>
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}

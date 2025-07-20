@@ -1,0 +1,28 @@
+.category{
+    width: 17rem;
+    text-align: center;
+    
+}
+
+
+.category img{
+    width: 100%;
+    border-radius: 1rem;
+}
+
+
+.category h3{
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+
+.category .category__noimage{
+    width: 75%;
+    object-fit: cover;
+}
+
+
+.category a{
+    display: block;
+}

@@ -1,0 +1,16 @@
+{% load static %}
+<div class='recipe'>
+    <div class='recipe__left'>
+        {% if recipe.image %}
+            <img src="recipe.image.url" alt="recipe.title">
+        {% else %}
+            <img src="{% static "main/images/no-pictures.png" %}" alt="recipe has no image">
+        {% endif %}
+    </div>
+    <div class='recipe__right'>
+        <h3>
+            {{recipe.title}}
+        </h3>
+        
+    </div>
+</div>

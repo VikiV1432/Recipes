@@ -1,0 +1,52 @@
+.account-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: auto;
+    width: 50%;
+
+}
+
+
+.account-form .field{
+    width: 100%;
+}
+
+
+.account-form .btn{
+    width: 50%;
+    align-self: center;
+}
+
+
+.profile-info{
+    display: flex;
+    gap: 3rem;
+    padding: 2rem 0;
+}
+
+
+.profile-info-left{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.profile-section .line{
+    margin: 2rem 0;
+}
+
+
+.highlighted{
+    color: var(--primary-color);
+}
+
+
+.profile-info-avatar{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+

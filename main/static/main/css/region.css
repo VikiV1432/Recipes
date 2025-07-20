@@ -1,0 +1,16 @@
+.region{
+    width: 17rem;
+    text-align: center;
+}
+
+
+.region img{
+    width: 100%;
+    border-radius: 1rem;
+}
+
+
+.region h3{
+    margin-top: 1rem;
+    font-size: 1rem;
+}

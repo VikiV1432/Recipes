@@ -1,0 +1,24 @@
+{% load static %}
+<div class='options'>
+    <div class='options__chosen'>
+         <p class='options__chosen-text'>
+            Not Chosen
+        </p>
+        <img src="{% static "main/images/down-arrow.png" %}" alt="down arrow">
+    </div>
+    <div class='options__content'>
+        <div class='options__search'>
+            <input type="text" placeholder='search' class='field '>
+        </div>
+        <div class='options__items'>
+            {% for item in items %}
+                <div class='options__item'>
+                    {% if item.image %}
+                        <img src="{{item.image.url}}" alt="ingredient image">                                                            
+                    {% endif %}
+                    {{item.title}}
+                </div>                                                    
+            {% endfor %}
+        </div>
+    </div>
+</div>

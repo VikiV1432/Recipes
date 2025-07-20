@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "accounts/css/style.css" %}">
+{% endblock css %}
+
+{% block content %}
+        <section class='section profile-section'>
+            <div class="container">
+                <h2 class='section-title'>
+                    Your Profile
+                </h2>
+                <hr class='line'>
+                <div class='profile-info'>
+                    <div class='profile-info-left'>
+                        {% if  user.profile and user.profile.avatar%}
+                            <img src="{{user.profile.avatar.url}}" alt="{{user.username}}'s avatar" class="profile-info-avatar">
+                        {% else %}
+                            <img src="{% static "main/images/no-avatar.svg" %}" alt="no avatar" class="profile-info-avatar">
+                        {% endif %}
+                        <a href="{% url "edit-profile" %}" class='btn'> Edit Profile </a>
+                    </div>
+                    <div class='profile-info-right'>
+                        <p>
+                            <span class='highlighted'>Username:</span>
+                            {{user.username}}
+                        </p>
+                        <p>
+                            <span class='highlighted'>Email:</span>
+                            {{user.email}}
+                        </p>
+                        <p>
+                            <span class='highlighted'>Bio:</span>
+                            {% if  user.profile.bio %}{{user.profile.bio}}{% endif %}
+                            
+                        </p>
+                        <p>
+                            <span class='highlighted'>Birthday:</span>
+                            {% if  user.profile.birthday%}{{user.profile.birthday}}{% endif %}
+                        </p>
+                        <p>
+                            <span class='highlighted'>Location:</span>
+                            {% if user.profile.location %}{{user.profile.location}}{% endif %}
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class='section profile-section'>
+            <div class="container">
+                <h2 class="section-title">
+                    Your Recipe
+    
+                </h2>
+                <hr class='line'>
+                <a href="{% url "add-menu" %}" class='btn'>Add Menu</a>
+                <div class='recipes'>
+                    {% for recipe in user.recipes.all%}
+                        
+                    {%endfor%}
+
+                </div>
+
+            </div>
+        </section>
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}

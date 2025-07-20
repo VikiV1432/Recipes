@@ -13,3 +13,6 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/VikiV1432/Recipes.git
 git push -u origin main
+py manage.py makemigration - создает переход из пайтона sql
+py manage.py migrate - делает переход
+py manage.py createsuperuser - создает администратора

@@ -1,0 +1,19 @@
+{% load static %}
+<header class='header'>
+    <div class='container header__container'>
+        <div class='header__left'>
+            <h1>
+                Discover Recipe <br>& Delicious Food
+            </h1>
+                <div class='header__search'>
+                    <input class='input input_big' type="text" placeholder='Search Your Favorite Food'>
+                    <button class='input__btn'>
+                        <img src="{% static "main/images/bi_arrow-right.svg" %}" alt="Arrow">
+                    </button>
+                </div>
+        </div>
+        <div class='header__right'>
+            <img src="{% static "main/images/header.jpg" %}" alt>
+        </div>
+    </div>
+</header>

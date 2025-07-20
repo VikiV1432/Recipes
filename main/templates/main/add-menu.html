@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Tastesee Treasure-Add Menu{% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "main/css/index.css" %}">
+{% endblock css %}
+{% block content %} 
+    <main>
+        <section class='section'>
+            <div class='container'>
+                <form  enctype="multipart/form-data" class='add-menu-form' method='POST'>
+                    {% csrf_token %}
+                    <h2>
+                        Add New Recipe
+                    </h2>
+                    {% for input in form %}
+                        <p>
+                            {% if input.name == "image" %}
+                                <img src="{% static "main/images/no-pictures.png" %}" alt="no image" >
+                                <input type="file" name="image" id="image">
+                            {% elif input.name == 'description' %}
+                                <div>
+                                    <h3>
+                                        Add Ingredients
+                                    </h3>
+                                    <div class='ingredients'>
+                                        <button class='btn' id='add-ingredient' type='button'>
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                                {{input}}
+                                
+                            {% else %}
+                                {{input}}
+                            {% endif %}
+                        </p>
+                    {% endfor %}
+                    <button class='btn'>
+                        Save
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock content %}
+{% block js %}
+    <script src='{% static "main/js/script.js" %}'>
+
+    </script>
+{% endblock js %}

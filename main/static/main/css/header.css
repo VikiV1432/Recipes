@@ -1,0 +1,50 @@
+.header{
+    padding: 7rem 0;
+}
+.header__right img{
+    width: 100%; 
+    max-width: 550px;
+    border-radius: 1rem;
+}
+
+.header__left{
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+}
+
+.header__container{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.input_big{
+    padding: 1.4rem ;
+    border-radius: 3rem;
+    font-size: 1.2rem;
+    width: 100%;
+    padding-right: 5rem;
+
+}
+
+.header__search{
+    position: relative;
+
+}
+
+.input__btn{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 1.2rem;
+}

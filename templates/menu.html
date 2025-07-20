@@ -1,0 +1,36 @@
+{% load static %}
+<nav class='menu'>
+    <div class='container menu__content'>
+        <ul class='menu__leftside'>
+            <li><a href="{% url "home" %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"> Home </a></li>
+            <li><a href="{% url "add-menu" %}"  class="{% if request.resolver_match.url_name == 'add-menu' %}active{% endif %}"> Add Menu</a></li>
+            <li><a href=""> Search </a></li>
+        </ul>
+        <div class='menu__rightside'>
+            {% if request.user.is_authenticated %}
+                <div class='menu__user'>
+                    {% if  request.user.profile and request.user.profile.avatar%}
+                        <img src="{{request.user.profile.avatar.url}}" alt="{{request.user.username}}'s avatar" class="menu__avatar">
+                    {% else %}
+                        <img src="{% static "main/images/no-avatar.svg" %}" alt="no avatar" class="menu__avatar">
+                    {% endif %}
+                    <a href="{% url "profile" request.user.username %}">
+                        {{request.user.username}}
+                    </a>
+                    <form method="POST" action="{% url "logout" %}">
+                        {% csrf_token %}
+                        <button>
+                            Logout
+                        </button> 
+
+                    </form>
+                </div> 
+            {% else %}
+            <ul class='menu__account-links'>
+                <li><a href="{% url "sign-in" %}"> Log in </a></li>
+                <li><a href="{% url "sign-up" %}"> Sign up</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>

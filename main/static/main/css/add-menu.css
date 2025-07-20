@@ -1,0 +1,29 @@
+.add-menu-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-menu-form input, .add-menu-form select, .add-menu-form textarea{
+    width: 100%;
+}
+
+
+.add-menu-form img{
+    width: 200px;
+}
+
+.ingredients-field{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2fr 1fr 2fr;
+}
+
+
+.ingredients{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+

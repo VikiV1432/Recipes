@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Tastesee Treasure-Home Page {% endblock title %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "main/css/index.css" %}">
+{% endblock css %}
+{% block content %} 
+  {% include "main/header.html" %} 
+        <div class='container'>
+            <section class='section'>
+                <h2 class='section-title'>
+                    Dish Of The Day !
+                </h2>
+                {% include "main/recipe_card.html" with title='Healthy Bites:Nourishing Sandwich Creations ' description='“Quick + Easy Veggie Delight Sandwich - Elevate Your Lunch in Minutes!“' image='/static/main/images/header.jpg' %}
+            </section>
+            <section class='section'>
+                <h2 class='section-title'>
+                    Popular For You !
+                </h2>
+                {% include "main/recipe_card.html" with reversed=True title='Tropical Paradise Crunch:Dive into a Refreshing Salad Oasis of Exotic Delights!' description="Dive into our 'Tropical Paradise Crunch' - a refreshing salad with exotic delights in every bite!" image='/static/main/images/categoria.jpg' %}
+            </section>
+            <section class='section'>
+                <h2 class='section-title'>
+                    Check Out Other Recipes Of Your Choice !
+                </h2>
+                <div class='categories'>
+                    {% for recipe in recipe_types %}
+                            {% include "main/category.html" with link='' title=recipe.title image=recipe.image %}
+                    {% endfor %}
+                </div>
+            </section>
+            <section class='section'>
+                <h2 class='section-title'>
+                    Check Out By Region !
+                </h2>
+                <div class='categories'>
+                    {% for cuisine in cuisines %}
+                        {% include "main/category.html" with link='' title=cuisine.title image=cuisine.image %}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+
+   
+{% endblock content %}
+{% block js %}{% endblock js %}

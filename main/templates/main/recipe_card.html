@@ -1,0 +1,18 @@
+{% load static %}
+<div class='recipe-card {% if reversed %}recipe-card_reversed{% endif %} '> 
+        <div class='recipe-card__left'>
+            <img src="{{image}}" alt="{{title}}">
+        </div>
+        <div class='recipe-card__right'>
+            <h3>
+                {{title}}
+            </h3>
+            <hr class='line'>
+            <p>
+                {{description}}
+            </p>
+            <a href="" class='btn btn_outlined'>
+                Explore More
+            </a>
+    </div>
+</div>
