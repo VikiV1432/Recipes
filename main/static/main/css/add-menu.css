@@ -26,4 +26,16 @@
     gap: 1rem;
 }
 
+.btn.loader img{
+    width: 30px;
+    height: 30px;
+    display: none;
+}
+
+
+.btn.loader.loading img{
+    display: inline-block;
+
+}
+
 

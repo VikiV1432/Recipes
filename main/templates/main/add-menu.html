@@ -8,7 +8,7 @@
     <main>
         <section class='section'>
             <div class='container'>
-                <form  enctype="multipart/form-data" class='add-menu-form' method='POST'>
+                <form  enctype="multipart/form-data" class='add-menu-form' method='POST' action='{%url "add-menu"%}'>
                     {% csrf_token %}
                     <h2>
                         Add New Recipe
@@ -36,10 +36,12 @@
                             {% endif %}
                         </p>
                     {% endfor %}
-                    <button class='btn'>
+                    <button class='btn loader'>
                         Save
+                        <img src="{% static "main/images/loading.gif" %}" alt="loading">
                     </button>
                 </form>
+                {{form.errors}}
             </div>
         </section>
     </main>

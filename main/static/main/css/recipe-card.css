@@ -35,9 +35,6 @@
 }
 
 
-
-
-
 .recipe-card__left::before{
     content: '';
     position: absolute;

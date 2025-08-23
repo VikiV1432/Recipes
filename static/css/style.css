@@ -142,6 +142,14 @@ p{
     color: var(--secondary-color);
     background-color: var(--primary-color);
     width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn:disabled{
+    opacity: 0.7;
 }
 
 

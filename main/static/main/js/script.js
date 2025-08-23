@@ -40,13 +40,13 @@ function createOptions(items) {
     optionsContent.appendChild(optionsItems)
     optionsDiv.appendChild(optionsHeader)
     optionsDiv.appendChild(optionsContent)
-    
+
 
 
     optionsHeader.addEventListener('click', (e) => {
         const options = document.querySelectorAll('.options')
         for (const opt of options) {
-            if(opt !== optionsDiv) {
+            if (opt !== optionsDiv) {
                 opt.classList.remove('open')
             }
         }
@@ -77,33 +77,66 @@ function createOptions(items) {
     return optionsDiv
 }
 
-async function getIngredientsAndUnits(){
-    const response=await fetch('/api/ingredients')
-    const data=await response.json()
+async function getIngredientsAndUnits() {
+    const response = await fetch('/api/ingredients')
+    const data = await response.json()
     return data
 }
 
-const addIngredientBtn = document.querySelector('#add-ingredient')
-const ingredientsContainer = document.querySelector('.ingredients')
-addIngredientBtn.addEventListener('click',async (e) => {
-    const{ingredients, units} = await getIngredientsAndUnits() 
-    const ingredientsField = document.createElement('div')
-    ingredientsField.classList.add('ingredients-field')
-    const ingredientsOptions = document.createElement('div')
-    ingredientsOptions.classList.add('ingredients-options')
-    const ingredientsOptionsContent = createOptions(ingredients)
-    ingredientsOptions.appendChild(ingredientsOptionsContent)
-    const input = document.createElement('input')
-    input.type = 'number'
-    input.placeholder = 'choose amount'
-    input.classList.add('field')
-    const unitsOptions = document.createElement('div')
-    unitsOptions.classList.add('units-options')
-    const unitsOptionsContent = createOptions(units)
-    unitsOptions.appendChild(unitsOptionsContent)
-    ingredientsField.appendChild(ingredientsOptions)
-    ingredientsField.appendChild(input)
-    ingredientsField.appendChild(unitsOptions)
-    ingredientsContainer.appendChild(ingredientsField)
+window.addEventListener('DOMContentLoaded', () => {
+    const addIngredientBtn = document.querySelector('#add-ingredient')
+    const ingredientsContainer = document.querySelector('.ingredients')
+    addIngredientBtn.addEventListener('click', async (e) => {
+        const { ingredients, units } = await getIngredientsAndUnits()
+        const ingredientsField = document.createElement('div')
+        ingredientsField.classList.add('ingredients-field')
+        const ingredientsOptions = document.createElement('div')
+        ingredientsOptions.classList.add('ingredients-options')
+        const ingredientsOptionsContent = createOptions(ingredients)
+        ingredientsOptions.appendChild(ingredientsOptionsContent)
+        const input = document.createElement('input')
+        input.type = 'number'
+        input.placeholder = 'choose amount'
+        input.classList.add('field')
+        const unitsOptions = document.createElement('div')
+        unitsOptions.classList.add('units-options')
+        const unitsOptionsContent = createOptions(units)
+        unitsOptions.appendChild(unitsOptionsContent)
+        ingredientsField.appendChild(ingredientsOptions)
+        ingredientsField.appendChild(input)
+        ingredientsField.appendChild(unitsOptions)
+        ingredientsContainer.appendChild(ingredientsField)
+    })
+
+    const form = document.querySelector('.add-menu-form')
+    const loaderBtn = form.querySelector('.loader')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const formData = new FormData(form)
+        const ingredients = []
+        const ingredientsFields = ingredientsContainer.querySelectorAll('.ingredients-field')
+        ingredientsFields.forEach((field)=>{
+            const ingredient = field.querySelector('.ingredients-options .options__chosen-text')
+            const unit = field.querySelector('.units-options .options__chosen-text')
+            const input = field.querySelector('[type="number"]')
+            
+        ingredients.push({ingredient: ingredient.textContent, unit: unit.textContent, input: input.value})
+
+        })
+        loaderBtn.classList.add('loading')
+        loaderBtn.setAttribute('disabled', true)
+        formData.append('ingredients', JSON.stringify(ingredients))
+        fetch(form.action,{
+            method:"POST", 
+            headers: {"X-CSRFToken": formData.get("csrfmiddlewaretoken")},
+            body: formData
+        }).then((data)=>{
+            loaderBtn.classList.remove('loading')
+            loaderBtn.setAttribute('disabled', false)
+            window.location.replace(data.url)
+        })
+
+    })
 })
+
 

@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, View
 from .models import RecipeType, Cuisine, Recipe, Ingredient, RecipeIngredient, Unit
 from django.urls import reverse_lazy
 from .forms import RecipeForm
 from django.http import JsonResponse
+import json
 
 # Create your views here.
 class HomePageView(TemplateView):
@@ -28,6 +29,30 @@ class AddMenuPage(View):
     def form_valid(self, form):
         form.instance.user=self.request.user
         return super().form_valid(form)
+    def post(self, request):
+        ingredients= request.POST.get('ingredients')
+        form= RecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            recipe= form.save(commit=False)
+            recipe.user= request.user
+            recipe.save()
+            if ingredients is not None:
+                ingredients=json.loads(ingredients)
+                for ingredient in ingredients:
+                    name= ingredient.get('ingredient')
+                    unit= ingredient.get('unit')
+                    input= ingredient.get('input')
+                    RecipeIngredient.objects.create(
+                        ingredient=Ingredient.objects.get(title=name),
+                        unit=Unit.objects.get(title=unit),
+                        quantity=float(input),
+                        recipe=recipe
+                    )
+            return redirect('home')
+        print(form.errors)
+        ingredients=Ingredient.objects.all()
+        units=Unit.objects.all()
+        return render(request, self.template_name, context={'form':form,'ingredients':ingredients,'units':units})
 
     
 def get_all_ingredients_data(request):
