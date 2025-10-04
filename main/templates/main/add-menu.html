@@ -8,15 +8,25 @@
     <main>
         <section class='section'>
             <div class='container'>
-                <form  enctype="multipart/form-data" class='add-menu-form' method='POST' action='{%url "add-menu"%}'>
+                <form  enctype="multipart/form-data" class='add-menu-form' method='POST' >
                     {% csrf_token %}
-                    <h2>
-                        Add New Recipe
-                    </h2>
+                    {% if form.instance.title  %}
+                        <h2>
+                            Edit Recipe {{form.instance.title}}
+                        </h2>
+                    {% else %}
+                        <h2>
+                            Add New Recipe
+                        </h2>
+                    {% endif %}
                     {% for input in form %}
                         <p>
                             {% if input.name == "image" %}
-                                <img src="{% static "main/images/no-pictures.png" %}" alt="no image" >
+                                {% if form.instance.image %}
+                                    <img src="{{form.instance.image.url}}" alt="{{form.instance.title}}">
+                                {% else %}
+                                    <img src="{% static "main/images/no-pictures.png" %}" alt="no image" >
+                                {% endif %}
                                 <input type="file" name="image" id="image" class='field-file'>
                                 <label for="image" class='field field-file-label'>Choose an Image</label>
                             {% elif input.name == 'description' %}

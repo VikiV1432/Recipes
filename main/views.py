@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, CreateView, View
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import TemplateView, CreateView, View, UpdateView, DeleteView
 from .models import RecipeType, Cuisine, Recipe, Ingredient, RecipeIngredient, Unit
 from django.urls import reverse_lazy
 from .forms import RecipeForm
@@ -21,17 +21,28 @@ class AddMenuPage(View):
     template_name='main/add-menu.html'
     success_url=reverse_lazy('home')
     form_class=RecipeForm
-    def get(self, request):
+    def get(self, request, slug=None):
+        recipes=Recipe.objects.filter(slug=slug)
+        if len(recipes)>0:
+            recipe=recipes[0]
+        else:
+            recipe=None
         ingredients=Ingredient.objects.all()
         units=Unit.objects.all()
         form=self.form_class()
+        if recipe:
+            form=self.form_class(instance=recipe)
         return render(request, self.template_name, context={'form':form,'ingredients':ingredients,'units':units})
     def form_valid(self, form):
         form.instance.user=self.request.user
         return super().form_valid(form)
-    def post(self, request):
+    def post(self, request, slug=None):
         ingredients= request.POST.get('ingredients')
-        form= RecipeForm(request.POST, request.FILES)
+        if slug:
+            recipe=get_object_or_404(Recipe,slug=slug)
+            form=RecipeForm(request.POST, request.FILES, instance=recipe)
+        else:
+            form= RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             recipe= form.save(commit=False)
             recipe.user= request.user
@@ -53,6 +64,7 @@ class AddMenuPage(View):
         else:
             return JsonResponse(form.errors, status=400)
        
+
 
     
 def get_all_ingredients_data(request):
