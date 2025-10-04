@@ -1,16 +1,32 @@
 {% load static %}
-<div class='recipe'>
-    <div class='recipe__left'>
-        {% if recipe.image %}
-            <img src="recipe.image.url" alt="recipe.title">
-        {% else %}
-            <img src="{% static "main/images/no-pictures.png" %}" alt="recipe has no image">
-        {% endif %}
-    </div>
+<div class="recipe">
+    {% if  recipe.image %}
+          <img src='{{recipe.image.url}}' alt='{{recipe.title}}' class='recipe__image'>
+    {% else %}
+        <img src="{% static "main/images/no-pictures.png" %}" alt="{{recipe.title}}" class='recipe__image recipe__image_no'>
+    {% endif %}
     <div class='recipe__right'>
         <h3>
-            {{recipe.title}}
+            <a href=''>
+                {{recipe.title}}
+            </a>
         </h3>
-        
-    </div>
+        <p class='recipe__ingredients'>
+            {% for ri in recipe.ingredients.all|slice:":5" %}
+                {{ri.ingredient.title}} - {{ri.quantity}} {{ri.unit.title}} <span>, </span>
+            {% endfor %}
+        </p>
+        <p class='recipe__descr'> 
+            {{recipe.description|truncatewords:50}}
+        </p>
+        <p class='recipe__actions'>
+            {% if recipe.user == request.user%}
+                <a href='' class='btn'>Edit</a>
+                <a href='' class='btn delete'>Delete</a>
+            {% else %}
+                <a href="" class='btn'>Like</a>
+                <a href="" class='btn'>Bookmark</a>
+            {% endif %}
+        </p>
+        </div>
 </div>

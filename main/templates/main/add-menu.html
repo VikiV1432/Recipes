@@ -17,7 +17,8 @@
                         <p>
                             {% if input.name == "image" %}
                                 <img src="{% static "main/images/no-pictures.png" %}" alt="no image" >
-                                <input type="file" name="image" id="image">
+                                <input type="file" name="image" id="image" class='field-file'>
+                                <label for="image" class='field field-file-label'>Choose an Image</label>
                             {% elif input.name == 'description' %}
                                 <div>
                                     <h3>
@@ -41,7 +42,7 @@
                         <img src="{% static "main/images/loading.gif" %}" alt="loading">
                     </button>
                 </form>
-                {{form.errors}}
+                
             </div>
         </section>
     </main>
@@ -50,4 +51,5 @@
     <script src='{% static "main/js/script.js" %}'>
 
     </script>
+    <script src="{% static "js/script.js" %}"></script>
 {% endblock js %}

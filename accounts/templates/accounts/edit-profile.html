@@ -24,7 +24,16 @@
                                 {% else %}
                                     <img src="{% static "main/images/no-avatar.svg" %}" alt="no avatar" class="profile-info-avatar">
                                 {% endif %}
-                                <input type="file" name="avatar" id="avatar">
+                                <input type="file" name="avatar" id="avatar" class='field-file'>
+                                <label for="avatar" class='field field-file-label'>Choose an Image</label>
+                                <p class='error'>
+                                    {{form.avatar.errors}}
+                                </p>
+                            {% elif input.name == "birthday" %}
+                                <input type="date" name="birthday" class='field'>
+                                <p class='error'>
+                                    {{form.birthday.errors}}
+                                </p>
                             {% else %}
                                 {{input}}
                             {% endif %}
@@ -33,15 +42,12 @@
                     <button class='btn'>
                         Save
                     </button>
-                    {% for message in messages %}
-                        <p>
-                            {{message}}
-                        </p>
-                    {% endfor %}
+                    
                 </form>
             </div>
         </section>
 {% endblock content %}
 
 {% block js %}
+        <script src='{% static "js/script.js" %}'></script>
 {% endblock js %}

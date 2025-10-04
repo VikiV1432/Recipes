@@ -129,6 +129,10 @@ p{
     font-size: 1rem;
 }
 
+.field.error{
+    border-color:var(--danger-color);
+}
+
 
 .section-title{
     border-left: var(--border);
@@ -152,6 +156,14 @@ p{
     opacity: 0.7;
 }
 
+.btn.delete{
+    background-color: var(--danger-color);
+
+}
+
+.btn.delete img{
+    width:20px;
+}
 
 .btn_outlined{
     background-color: var(--secondary-color);
@@ -190,4 +202,23 @@ p{
 
 .section{
     margin: 5rem 0;
+}
+
+span.error{
+    color: var(--danger-color);
+    display: block;
+    text-align: center;
+}
+
+.field-file{
+    position: fixed;
+    left: -100%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.field-file-label{
+    display: block;
+    font-size: 0.75rem;
+    cursor: pointer;
 }

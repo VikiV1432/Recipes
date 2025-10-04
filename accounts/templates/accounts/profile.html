@@ -62,7 +62,7 @@
                 <a href="{% url "add-menu" %}" class='btn'>Add Menu</a>
                 <div class='recipes'>
                     {% for recipe in user.recipes.all%}
-                        
+                       {% include "recipe.html" %}
                     {%endfor%}
 
                 </div>

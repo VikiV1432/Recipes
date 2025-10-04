@@ -102,9 +102,19 @@ window.addEventListener('DOMContentLoaded', () => {
         unitsOptions.classList.add('units-options')
         const unitsOptionsContent = createOptions(units)
         unitsOptions.appendChild(unitsOptionsContent)
+        const deleteBtn = document.createElement('button')
+        deleteBtn.classList.add('btn','delete')
+        const deleteImg = document.createElement('img')
+        deleteImg.src ="/static/main/images/delete.png"
+        deleteBtn.append(deleteImg)
+        deleteBtn.type ="button"
+        deleteBtn.addEventListener('click',()=>{
+            ingredientsField.remove()
+        })
         ingredientsField.appendChild(ingredientsOptions)
         ingredientsField.appendChild(input)
         ingredientsField.appendChild(unitsOptions)
+        ingredientsField.appendChild(deleteBtn)
         ingredientsContainer.appendChild(ingredientsField)
     })
 
@@ -130,10 +140,39 @@ window.addEventListener('DOMContentLoaded', () => {
             method:"POST", 
             headers: {"X-CSRFToken": formData.get("csrfmiddlewaretoken")},
             body: formData
-        }).then((data)=>{
+        }).then(async(data)=>{
+            if(data.ok){
+                window.location.replace(data.url)
+            }
+            const response = await data.json()
+            if(! data.ok){
+                throw response
+            }
+            return data.json()
+        }).catch((error)=>{
+            const fields = form.querySelectorAll("p")
+            fields.forEach((field)=>{
+                const sp = field.querySelectorAll('span')
+                sp.forEach((s)=>{
+                    s.remove()
+                })
+                const input = field.querySelector('input')
+                if(input == null){
+                    return
+                }
+                input.classList.remove('error')
+                const name = input.getAttribute('name')
+                if (Object.keys(error).indexOf(name) != -1){
+                    input.classList.add('error')
+                    const span = document.createElement('span')
+                    span.classList.add('error')
+                    span.textContent = error[name]
+                    field.appendChild(span)
+                }
+            })
+        }).finally(()=>{
             loaderBtn.classList.remove('loading')
-            loaderBtn.setAttribute('disabled', false)
-            window.location.replace(data.url)
+            loaderBtn.removeAttribute('disabled')
         })
 
     })

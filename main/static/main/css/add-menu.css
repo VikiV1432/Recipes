@@ -16,7 +16,7 @@
 .ingredients-field{
     display: grid;
     gap: 1rem;
-    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-columns: 2fr 1fr 2fr 40px;
 }
 
 

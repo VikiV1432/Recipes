@@ -47,12 +47,12 @@ class AddMenuPage(View):
                         unit=Unit.objects.get(title=unit),
                         quantity=float(input),
                         recipe=recipe
+
                     )
             return redirect('home')
-        print(form.errors)
-        ingredients=Ingredient.objects.all()
-        units=Unit.objects.all()
-        return render(request, self.template_name, context={'form':form,'ingredients':ingredients,'units':units})
+        else:
+            return JsonResponse(form.errors, status=400)
+       
 
     
 def get_all_ingredients_data(request):

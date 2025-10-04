@@ -1,0 +1,38 @@
+.recipe{
+    display: flex;
+    gap: 5rem;
+}
+
+.recipe__image{
+    width: 27rem;
+    height: 16rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
+}
+
+.recipe__image_no{
+    object-fit: contain;
+    background-color: var(--ghost-color);
+}
+
+.recipe__ingredients span:last-child{
+    display: none;
+}
+
+
+.recipe__actions{
+    display: flex;
+    gap: 1rem;
+}
+
+.recipe__right{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+.recipe__descr{
+    flex-grow: 1;
+}

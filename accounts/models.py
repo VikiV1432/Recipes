@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from utils.validators import validate_image
 # Create your models here.
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
-    avatar=models.ImageField(upload_to="accounts/", blank=True, null=True)
+    avatar=models.ImageField(upload_to="accounts/", blank=True, null=True, validators=[validate_image])
     bio=models.TextField(max_length=500, blank=True, null=True)
     birthday=models.DateField(null=True, blank=True)
     location=models.CharField(max_length=100, blank=True, null=True)
